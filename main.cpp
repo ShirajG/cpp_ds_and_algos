@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 using namespace std;
 
@@ -12,6 +13,7 @@ vector<int> merge(vector<int> left, vector<int> right) {
       returnVal.push_back(left[i]);
       i++;
     } else {
+      // inversion here
       returnVal.push_back(right[j]);
       j++;
     }
@@ -65,16 +67,21 @@ vector<int> reverseArray(vector<int> array) {
   return output;
 }
 
+// vector<int> readFile(string fileName) {
+//  ifstream file;
+//  file.open(filename);
+//  while(!file.eof()) {
+//      /* code */
+//  }
+// }
+
 int main() {
   vector<int> numArray;
-  for (int i = 0; i < 10; ++i) {
+  for (int i = 0; i < 11; ++i) {
     numArray.push_back(rand());
   }
-  // print_vector(numArray);
-  vector<int> reversed = reverseArray(numArray);
-  print_vector(reversed);
-  cout << "==========================" << endl;
-
-  print_vector(mergeSort(reversed));
+  print_vector(numArray);
+  cout << "=====================================" << endl;
+  print_vector(mergeSort(numArray));
   return 0;
 }
