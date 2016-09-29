@@ -45,9 +45,9 @@ vector<int> mergeSort(vector<int> arr) {
   vector<int> right;
   for (int i = 0; i < arr.size(); ++i) {
     if (i < arr.size() / 2) {
-      right.push_back(arr[i]);
-    } else {
       left.push_back(arr[i]);
+    } else {
+      right.push_back(arr[i]);
     }
   }
   return merge(mergeSort(left), mergeSort(right));
