@@ -4,23 +4,19 @@
 #include <string>
 using namespace std;
 
+long inversionCount = 0;
+
 vector<int> merge(vector<int> left, vector<int> right) {
   vector<int> returnVal;
-  int inversionCount = 0;
-  struct mergeResults {
-    vector<int> merged;
-    int inversionCount;
-  };
-
   int i = 0;
   int j = 0;
 
-  while(returnVal.size() < left.size() + right.size()) {
-    if(left[i] <= right[j]){
+  while (returnVal.size() < left.size() + right.size()) {
+    if (left[i] <= right[j]) {
       returnVal.push_back(left[i]);
       i++;
     } else {
-      // inversion here
+      inversionCount += left.size() - i;
       returnVal.push_back(right[j]);
       j++;
     }
@@ -78,9 +74,10 @@ vector<int> readFile(string fileName) {
   ifstream inputFile(fileName);
   string line;
   vector<int> numbers;
+  int number;
 
   while (getline(inputFile, line)) {
-    int number = stoi(line);
+    number = stoi(line);
     numbers.push_back(number);
   }
 
@@ -88,12 +85,8 @@ vector<int> readFile(string fileName) {
 }
 
 int main() {
-  vector<int> fileInput = readFile("text.txt");
-  // for (int i = 0; i < 11; ++i) {
-    // numArray.push_back(rand());
-  // }
-  // print_vector(fileInput);
-  // cout << "=====================================" << endl;
-  print_vector(mergeSort(fileInput));
+  vector<int> fileInput = readFile("int_array.txt");
+  mergeSort(fileInput);
+  cout << "Inversions: " << inversionCount << endl;
   return 0;
 }
