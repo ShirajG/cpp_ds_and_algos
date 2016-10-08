@@ -1,10 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <string>
 using namespace std;
 
 vector<int> merge(vector<int> left, vector<int> right) {
   vector<int> returnVal;
+  int inversionCount = 0;
+  struct mergeResults {
+    vector<int> merged;
+    int inversionCount;
+  };
+
   int i = 0;
   int j = 0;
 
@@ -67,21 +74,26 @@ vector<int> reverseArray(vector<int> array) {
   return output;
 }
 
-// vector<int> readFile(string fileName) {
-//  ifstream file;
-//  file.open(filename);
-//  while(!file.eof()) {
-//      /* code */
-//  }
-// }
+vector<int> readFile(string fileName) {
+  ifstream inputFile(fileName);
+  string line;
+  vector<int> numbers;
+
+  while (getline(inputFile, line)) {
+    int number = stoi(line);
+    numbers.push_back(number);
+  }
+
+  return numbers;
+}
 
 int main() {
-  vector<int> numArray;
-  for (int i = 0; i < 11; ++i) {
-    numArray.push_back(rand());
-  }
-  print_vector(numArray);
-  cout << "=====================================" << endl;
-  print_vector(mergeSort(numArray));
+  vector<int> fileInput = readFile("text.txt");
+  // for (int i = 0; i < 11; ++i) {
+    // numArray.push_back(rand());
+  // }
+  // print_vector(fileInput);
+  // cout << "=====================================" << endl;
+  print_vector(mergeSort(fileInput));
   return 0;
 }
